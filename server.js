@@ -59,14 +59,14 @@ app.post("/send", async (req, res) => {
     // success = true, gone = false
     return res.json({ success: true, gone: false });
   } catch (err) {
-    // Vanligast: 404 / 410 = subscription ogiltig/borttagen
+    // Vanligast: 400 (BadDeviceToken) / 404 / 410 = subscription ogiltig/borttagen
     console.error(
       "WebPush error:",
       err.statusCode,
       err.body || err.toString()
     );
 
-    if (err.statusCode === 404 || err.statusCode === 410) {
+    if (err.statusCode === 400 || err.statusCode === 404 || err.statusCode === 410) {
       // Säg till Bubble att denna subscription är "död"
       return res.json({
         success: false,
@@ -83,6 +83,7 @@ app.post("/send", async (req, res) => {
     });
   }
 });
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log("Push-server kör på port", PORT);

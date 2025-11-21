@@ -18,7 +18,7 @@ webpush.setVapidDetails(
 );
 
 // Enkel "hemlig nyckel" så inte vem som helst kan använda ditt push-API
-const SERVER_SECRET = "SUPERRANDOM-OCH-HEMLIGT-LÖSEN-123456789";
+const SERVER_SECRET = "Nvidia8007185716@";
 
 // POST /send  → skicka EN push till EN subscription
 app.post("/send", async (req, res) => {
